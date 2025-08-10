@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import "./App.css";
+import Button from '@mui/material/Button';
 
 function App() {
   const [name, setName] = useState("");
@@ -39,14 +40,14 @@ function App() {
           onChange={(e) => setDescription(e.currentTarget.value)}
           placeholder="Enter a description..."
         />
-        <button type="submit">Create</button>
-        <button
-          className="row"
+        <Button type="submit">Create</Button>
+        <Button
+          variant="contained"
           onClick={async () => {
             await listTasks();
           }}>
           List
-      </button>
+      </Button>
       </form>
 
 

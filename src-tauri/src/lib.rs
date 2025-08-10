@@ -6,6 +6,7 @@ use std::path::PathBuf;
 use serde::Serialize;
 
 #[derive(Serialize)]
+#[derive(Debug)]
 struct Task {
     id: i32,
     name: String,
@@ -36,7 +37,7 @@ fn list_tasks() -> Result<Vec<Task>, String> {
     db_path.push("tasks.db");
 
     let conn = Connection::open(db_path).map_err(|e| e.to_string())?;
-    let mut stmt = conn.prepare("SELECT id, name, description FROM tasks").map_err(|e| e.to_string())?;
+    let mut stmt = conn.prepare("SELECT * FROM tasks").map_err(|e| e.to_string())?;
     
     let task_iter = stmt.query_map(params![], |row| {
         Ok(Task {
